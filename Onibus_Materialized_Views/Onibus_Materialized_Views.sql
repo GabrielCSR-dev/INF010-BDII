@@ -1,0 +1,15 @@
+CREATE MATERIALIZED VIEW TOTAL_PASSAGEIROS_POR_LINHA AS
+	SELECT COUNT(P.CPF) FROM Passageiro AS P
+		INNER JOIN Viagem AS V
+			ON(V.CPF_Passageiro = P.CPF)
+		INNER JOIN Turno AS T
+			ON(V.Cod_Turno = T.Cod_Turno)
+		INNER JOIN Linha AS L
+			ON(T.Numero_Linha = L.Numero)
+	GROUP BY L.Numero;
+
+CREATE MATERIALIZED VIEW TOTAL_ARRECADADO_POR_LINHA AS
+	SELECT SUM(T.Caixa) FROM Turno AS T
+		INNER JOIN Linha AS L
+			ON(L.Numero = T.Numero_Linha)
+	GROUP BY L.Numero;

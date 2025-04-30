@@ -1,0 +1,8 @@
+-- CREATE TRIGGER Update_Idx
+-- 	AFTER UPDATE OF idh_educacao, idh_longevidade, idh_geral
+-- 	ON Indice
+-- 	FOR EACH ROW
+-- 	WHEN (OLD.idh_educacao IS DISTINCT FROM NEW.idh_educacao
+-- 		OR OLD.idh_longevidade IS DISTINCT FROM NEW.idh_longevidade
+-- 		OR OLD.idh_geral IS DISTINCT FROM NEW.idh_geral)
+-- 	EXECUTE PROCEDURE IDX();

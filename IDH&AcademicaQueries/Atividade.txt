@@ -25,5 +25,3 @@ Para a base de dados acadêmicos, devem ser consideradas as seguintes consultas:
 Ao total, serão 13 consultas, 11 para a base de IDH + 2 para a base acadêmica.
 
 As bases e seus scripts estão disponíveis aqui:  https://ads.ifba.edu.br/file145
-
-Valor total: 2

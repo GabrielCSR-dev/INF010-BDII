@@ -1,0 +1,7 @@
+Atividade de Procedimentos armazenados com a base de dados de IDH
+
+- Criar um novo atributo na tabela de índices, o qual deve ser chamado de IDX
+
+- Implementar um procedimento que preencha este atributo a partir do seguinte cálculo:
+
+IDX = (ÍNDICE DE EDUCAÇÃO^2 * ÍNDICE DE LONGEVIDADE)/IDH_GERAL

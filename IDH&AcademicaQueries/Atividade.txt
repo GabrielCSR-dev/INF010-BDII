@@ -1,0 +1,29 @@
+Para cada consulta, deve ser exibido o plano de execução original e o plano de execução após eventual intervenção do aluno na consulta ou na base de dados com o intuito de melhorar o desempenho da consulta. O resultado da intervenção deve ser comentado, mesmo que não tenha obtido ganhos.
+
+Para a base de dados IDH:
+
+1 - Municípios que não pertencem a região norte
+2 - Municípios que possuem o mesmo nome
+3 - Média de municípios por Região
+4 - Sigla dos estados com as respectivas quantidades de municípios
+5 - Município com as pessoas mais idosas
+6 - Ano em que Salvador obteve o melhor índice de Instrução
+7 - Qual o município com a melhor distribuição de renda
+8 - Quais estados possuem municípios com IDH geral maior que 0,8
+9 - Qual o maior IDH de educação por estado
+10- Relatório de Todos IDHs da Bahia de 91 e 2000, inclusive com a
+diferença entre os mesmos
+11 - Relatório comparativo entre as médias dos IDHs de SC e AL,
+de 2000 e 91
+
+Para a base de dados acadêmicos, devem ser consideradas as seguintes consultas:
+
+- Gerar um relatório com todos os departamentos, professores, turmas e média das notas dos alunos em cada turma entre 2006 a 2010.
+
+- Gerar relatório com nome do aluno, disciplinas cursadas com respectivos professores das turmas e notas e respectivo departamento dos professores
+ 
+Ao total, serão 13 consultas, 11 para a base de IDH + 2 para a base acadêmica.
+
+As bases e seus scripts estão disponíveis aqui:  https://ads.ifba.edu.br/file145
+
+Valor total: 2

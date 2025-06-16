@@ -40,32 +40,52 @@ SELECT DISTINCT grade, numeric_grade FROM TAKES;
 
 -- Query
 
+EXPLAIN ANALYZE
 WITH TAB1 AS
 (SELECT S.course_id, S.sec_id, S.semester, S.year, AVG(T.numeric_grade) As grade_avg FROM SECTION AS S
 	INNER JOIN TAKES AS T
 		ON((S.course_id, S.sec_id, S.semester) = (T.course_id, T.sec_id, T.semester))
 WHERE S.year >= 2006 AND S.year <= 2010
 GROUP BY S.course_id, S.sec_id, S.semester, S.year)
-SELECT D.dept_name, I.name, TAB1.course_id, TAB1.sec_id, TAB1.semester, TAB1.year, TAB1.grade_avg FROM TAB1
+SELECT I.dept_name, I.name, TAB1.course_id, TAB1.sec_id, TAB1.semester, TAB1.year, TAB1.grade_avg FROM TAB1
 	INNER JOIN TEACHES AS TE
 		ON((TAB1.course_id, TAB1.sec_id, TAB1.semester, TAB1.year) = (TE.course_id, TE.sec_id, TE.semester, TE.year))
 	INNER JOIN INSTRUCTOR AS I
-		ON(I.ID = TE.ID)
-	INNER JOIN DEPARTMENT AS D
-		ON(D.dept_name = I.dept_name);
+		ON(I.ID = TE.ID);
+
 
 -- - Gerar relatório com nome do aluno, disciplinas cursadas com respectivos professores das turmas e notas e respectivo departamento dos professores
-
-SELECT S.name, C.title, T.numeric_grade, I.name, D.dept_name FROM TAKES AS T
-	INNER JOIN STUDENT AS S
-		ON(T.ID = S.ID)
-	INNER JOIN SECTION AS SE
-		ON((T.course_id, T.sec_id, T.semester, T.year) = (SE.course_id, SE.sec_id, SE.semester, SE.year))
-	INNER JOIN COURSE AS C
-		ON(SE.course_id = C.course_id)
-	INNER JOIN TEACHES AS TE
+EXPLAIN ANALYZE
+WITH TAB1 AS
+(
+SELECT C.title, I.name, I.dept_name, SE.course_id, SE.sec_id, SE.semester, SE.year FROM SECTION AS SE
+	INNER JOIN COURSE AS C 
+		ON(SE.course_Id = C.course_Id)
+	INNER JOIN TEACHES AS TE 
 		ON((TE.course_id, TE.sec_id, TE.semester, TE.year) = (SE.course_id, SE.sec_id, SE.semester, SE.year))
-	INNER JOIN INSTRUCTOR AS I
-		ON(I.ID = T.ID)
-	INNER JOIN DEPARTMENT AS D
-		ON(D.dept_name = I.dept_name);
+	INNER JOIN INSTRUCTOR AS I 
+		ON(I.ID = TE.ID)
+	ORDER BY SE.course_id, SE.sec_id, SE.semester, SE.year
+)
+SELECT S.name, TAB1.title, T.numeric_grade, TAB1.name, TAB1.dept_name FROM TAB1
+	INNER JOIN TAKES AS T
+		ON((T.course_id, T.sec_id, T.semester, T.year) = (TAB1.course_id, TAB1.sec_id, TAB1.semester, TAB1.year))
+	INNER JOIN STUDENT AS S 
+		ON(T.ID = S.ID);	
+
+EXPLAIN ANALYZE
+WITH TAB1 AS
+(
+SELECT C.title, I.name, I.dept_name, SE.course_id, SE.sec_id, SE.semester, SE.year FROM SECTION AS SE
+	INNER JOIN COURSE AS C 
+		ON(SE.course_Id = C.course_Id)
+	INNER JOIN TEACHES AS TE 
+		ON((TE.course_id, TE.sec_id, TE.semester, TE.year) = (SE.course_id, SE.sec_id, SE.semester, SE.year))
+	INNER JOIN INSTRUCTOR AS I 
+		ON(I.ID = TE.ID)
+)
+SELECT S.name, TAB1.title, T.numeric_grade, TAB1.name, TAB1.dept_name FROM TAB1
+	INNER JOIN TAKES AS T
+		ON((T.course_id, T.sec_id, T.semester, T.year) = (TAB1.course_id, TAB1.sec_id, TAB1.semester, TAB1.year))
+	INNER JOIN STUDENT AS S 
+		ON(T.ID = S.ID);
